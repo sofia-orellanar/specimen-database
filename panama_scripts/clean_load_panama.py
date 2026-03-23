@@ -72,6 +72,9 @@ event_clean = event_df.rename(
 # .loc[] in pandas drops columns
 # The ~ means "not" so we keep all columns that do NOT start with "Unnamed"
 # pandas is doing some stuff with making a boolean array for all columns
+event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("fieldwork_status")]
+event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("low_tide")]
+event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("photos_env")]
 event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("use_in_map")]
 event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("population")]
 
@@ -101,6 +104,12 @@ specimen_clean = specimen_df.rename(
     }
 )
 
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("epithet")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("clade")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("family")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("vial")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("operculum")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("photos_org")]
 # Remove unnamed last columns
 # keep all columns that do NOT start with "Unnamed"
 specimen_clean = specimen_clean.loc[
@@ -131,6 +140,12 @@ dna_clean = dna_df.rename(
         "Qubit_after_SpeedVac": "qubit_after_speedvac", #create dummy in La Palma
     }
 )
+
+
+dna_clean = dna_clean.loc[:, ~dna_clean.columns.str.startswith("species")]
+dna_clean = dna_clean.loc[:, ~dna_clean.columns.str.startswith("plate_id")]
+dna_clean = dna_clean.loc[:, ~dna_clean.columns.str.startswith("plate_well")]
+
 ### add empty columns for BLAST info to Panama
 library_clean = library_df.rename(
     columns={
@@ -176,7 +191,7 @@ print(f"\nCleaned Genomic Library columns: {list(library_clean.columns)}")
 # The "connection" (conn) is your link to the database file
 # The "cursor" (cur) is the object you use to send SQL commands
 
-db_path = "skyescripts\\panama_specimens.db"
+db_path = "panama_scripts/panama_specimens.db"
 
 # Cleaning outputs made during testing
 if os.path.exists(db_path):
@@ -201,9 +216,8 @@ cur.execute("PRAGMA foreign_keys = ON;")
 cur.execute(
     """
 CREATE TABLE IF NOT EXISTS EventData (
-    event_code       TEXT PRIMARY KEY,  -- Unique ID for each collection event
+    event_code       TEXT PRIMARY KEY,
     trip_id          TEXT,
-    fieldwork_status TEXT,
     year             INTEGER,
     month            INTEGER,
     day              INTEGER,
@@ -212,20 +226,16 @@ CREATE TABLE IF NOT EXISTS EventData (
     latitude         REAL,
     longitude        REAL,
     environment      TEXT,
-    low_tide         REAL,
     collecting_method TEXT,
     depth            TEXT,
-    population       TEXT,
     locality         TEXT,
     locality_details TEXT,
     city_district    TEXT,
     province         TEXT,
     area             TEXT,
-    photos_env       TEXT,
     country          TEXT,
     collector        TEXT,
-    event_notes      TEXT,
-    use_in_map       TEXT
+    event_notes      TEXT
 );
 """
 )
@@ -242,18 +252,12 @@ CREATE TABLE IF NOT EXISTS SpecimenData (
     event_code       TEXT,              -- Links to EventData
     species          TEXT,
     genus            TEXT,
-    epithet          TEXT,
-    clade            TEXT,
-    family           TEXT,
     development      TEXT,
     habitat          TEXT,
     fixation_method  TEXT,
     specimen_count   INTEGER,
     parts            TEXT,
-    vial             TEXT,
-    operculum        TEXT,
     specimen_notes   TEXT,
-    photos_org       TEXT,
     identification_by TEXT,
     voucher          TEXT,
     second_voucher_clip TEXT,
@@ -268,9 +272,6 @@ cur.execute(
 CREATE TABLE IF NOT EXISTS DNAExtractions (
     extraction_id         TEXT PRIMARY KEY,  -- Unique ID for each extraction
     lot_id                TEXT,              -- Links to SpecimenData
-    species               TEXT,
-    plate_id              TEXT,
-    plate_well            TEXT,
     extraction_date       TEXT,
     extraction_kit        TEXT,
     elution_ul            REAL,
