@@ -42,7 +42,7 @@ event_clean = event_df.rename(
     columns={
         "trip_id": "trip_id",
         "event_code": "event_code",  # PRIMARY KEY
-        "fieldwork_status": "fieldwork_status", #remove
+        "fieldwork_status": "fieldwork_status",  # remove
         "year": "year",
         "month": "month",
         "day": "day",
@@ -51,7 +51,7 @@ event_clean = event_df.rename(
         "latitude": "latitude",
         "longitude": "longitude",
         "environment": "environment",
-        "low_tide": "low_tide", #remove? not in la palma
+        "low_tide": "low_tide",  # remove? not in la palma
         "collecting_method": "collecting_method",
         "depth": "depth",
         "population": "population",  # this will get removed
@@ -60,7 +60,7 @@ event_clean = event_df.rename(
         "city_district": "city_district",
         "province": "province",
         "area": "area",
-        "photos_env": "photos_env", #remove
+        "photos_env": "photos_env",  # remove
         "country": "country",
         "collector": "collector",
         "notes": "event_notes",  # Renamed - all the datasets have a notes column so need to rename to avoid confusion (disambiguation)

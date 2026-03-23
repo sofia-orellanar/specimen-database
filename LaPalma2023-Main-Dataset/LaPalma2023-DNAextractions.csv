@@ -1,0 +1,35 @@
+ExtractionID,Suffix,Voucher,Species,Date,Method,Elution_ul,Qubit_ngul,TissueType,ExtractionNotes,ClippingNotes,ExtractedBy,COI,PCRBy,Best_Match,Max_Score,Total_Score,Query_Cover,E-Value,Percent_Identity,Match_Length,Match_Accession
+gDNA-0067,.1,327965,Neritilia margaritae,9-Aug-2023,High Salt,45,47.8,whole body with shell,broke shell to expose tissue; all digested; white cotton-like thread and pellet,entire specimen used up for extraction,Tauana Cunha,PCR019,Madeleine Reed-Horn,Nassarius (Zeuxis) sp. HL-2010a,588,588,99%,8.00E-163,81.69%,709,GU393390.1
+gDNA-0081,,327911,Haliotis tuberculata,24-Aug-2023,High Salt,100,51,foot,pellet brown cotton thread,,Tauana Cunha,contamination-PCR020,Madeleine Reed-Horn,Lithodesmium undulatum,649,649,98%,0,83.19%,37057,NC_056903.1
+gDNA-0082,,327925,Phorcus sauciatus,24-Aug-2023,High Salt,100,53,foot,pellet cotton thread,,Tauana Cunha,PCR021,Madeleine Reed-Horn,Phorcus sauciatus,1216,1216,93%,0,100.00%,658,JN686312.1
+gDNA-0083,.1,327979,Tricolia azorica,24-Aug-2023,High Salt,100,28,whole body,all body which I had pulled in the field at time of fixation (except gills which remained inside shell); no visible DNA pellet,,Tauana Cunha,PCR022,Madeleine Reed-Horn,Tricolia pullus azorica,1216,1216,94%,0,100.00%,658,ON970427.1
+gDNA-0084,,327967,Marsenia perspicua,24-Aug-2023,High Salt,100,59,foot/mantle,pellet cotton thread,separate tissue and shell; saved shell and head,Tauana Cunha,redo-PCR023badquality,Madeleine Reed-Horn,Marsenia perspicua complex sp. MNHN IM 2019-17699,1018,1018,96%,0,96.01%,612,ON524345.1
+gDNA-0085,.1,327930,Clanculus berthelotii,24-Aug-2023,High Salt,100,52,whole body,"tissue dried by the time I put in buffer; thin whorl of viscera tissue discarded; pellet medium, brown",broke last whorl to reach tissue and pulled entire body out of shell; no tissue left; saved shell parts and operculum broken in two,Tauana Cunha,PCR024,Madeleine Reed-Horn,Clanculus cruciatus,809,809,92%,0,88.89%,657,DQ093522.1
+LP-DNA-01,,327935,Gibbula candei,5-Sep-2023,Omega EZNA,100,17.1,foot,thick milky layer; thin layer of aqueous phase,,"Tauana Cunha, Madeleine Reed-Horn",PCR001,Madeleine Reed-Horn,Steromphala umbilicaris,1279,1279,99%,0,99.57%,16277,NC_035682.1
+LP-DNA-02,.1,327978,Diodora graeca,5-Sep-2023,Omega EZNA,100,47.6,foot,,separated .1 ind,"Tauana Cunha, Madeleine Reed-Horn",PCR002,Madeleine Reed-Horn,Diodora graeca,1153,1153,96%,0,97.76%,669,AF120632.1
+LP-DNA-03,,327913,Haliotis tuberculata,12-Sep-2023,Omega EZNA,100,too high,foot,,,Madeleine Reed-Horn,redo,Madeleine Reed-Horn,,,,,,,,
+LP-DNA-04,,327920,Patella piperata,12-Sep-2023,Omega EZNA,100,7.7,foot,,,Madeleine Reed-Horn,PCR004,Madeleine Reed-Horn,Patella rustica,1105,1105,84%,0,100.00%,598,EU073902.1
+LP-DNA-05,.1,327914,Haliotis tuberculata,19-Sep-2023,Omega EZNA,100,46.7,foot,cut and extracted a small part of the visceral mass along with the foot,separated .1 ind,Madeleine Reed-Horn,redo,Madeleine Reed-Horn,,,,,,,,
+LP-DNA-06,,327917,Patella caerulea,19-Sep-2023,Omega EZNA,100,33.8,foot,,,Madeleine Reed-Horn,PCR006,Madeleine Reed-Horn,Patella candei,1171,1171,95%,0,99.53%,658,JF763827.1
+LP-DNA-07,,327915,Patella caerulea,26-Sep-2023,Omega EZNA,100,31.3,foot,,,Madeleine Reed-Horn,PCR007,Madeleine Reed-Horn,Patella candei,1162,1162,96%,0,99.38%,658,JF763827.1
+LP-DNA-08,,327932,Patella candei,26-Sep-2023,Omega EZNA,100,22.9,foot,,,Madeleine Reed-Horn,PCR008,Madeleine Reed-Horn,Patella aspera,1199,1199,92%,0,99.54%,658,KU566777.1
+LP-DNA-09,,327918,Patella caerulea,3-Oct-2023,Omega EZNA,100,6.96,foot,,,Madeleine Reed-Horn,PCR009,Madeleine Reed-Horn,Patella candei,1175,1175,96%,0,99.69%,658,JF763827.1
+LP-DNA-10,,327922,Patella aspera,3-Oct-2023,Omega EZNA,100,15.7,foot,,,Madeleine Reed-Horn,PCR010,Madeleine Reed-Horn,Patella candei,1205,1205,95%,0,99.70%,658,JF763827.1
+LP-DNA-11,.1,327919,Patella piperata,3-Oct-2023,Omega EZNA,100,14.6,foot,,separated .1 ind,Madeleine Reed-Horn,PCR011,Madeleine Reed-Horn,Patella rustica,1105,1105,85%,0,100.00%,598,EU073902.1
+LP-DNA-12,.1,327931,Patella candei,3-Oct-2023,Omega EZNA,100,4.94,foot/mantle,,separated .1 ind,Madeleine Reed-Horn,PCR012,Madeleine Reed-Horn,Patella candei,1168,1168,97%,0,99.53%,658,JF763827.1
+LP-DNA-13,.1,327923,Patella aspera,10-Oct-2023,Omega EZNA,100,30.5,foot,,elastic string to mark ind .1,Madeleine Reed-Horn,PCR013,Madeleine Reed-Horn,Patella aspera,1199,1199,92%,0,99.54%,658,KU566777.1
+LP-DNA-14,.1,327928,Phorcus sauciatus,10-Oct-2023,Omega EZNA,100,54,foot,,,Madeleine Reed-Horn,PCR014,Madeleine Reed-Horn,Phorcus sauciatus,1216,1216,92%,0,100.00%,658,JN686312.1
+LP-DNA-15,.1,327937,Gibbula candei,10-Oct-2023,Omega EZNA,100,10.9,foot,,separated .1 ind,Madeleine Reed-Horn,PCR015,Madeleine Reed-Horn,Steromphala umbilicaris,1273,1273,99%,0,99.29%,16277,NC_035682.1
+LP-DNA-16,,327945,Jujubinus gravinae,10-Oct-2023,Omega EZNA,100,11.3,foot/mantle/body,,pulled body from shell; saved head and posterior end; a bit more tissue remained in shell,Madeleine Reed-Horn,PCR016,Madeleine Reed-Horn,Jujubinus vexationis,1031,1031,88%,0,96.33%,627,KX277554.1
+LP-DNA-17,,327905,Patella sp.,17-Oct-2023,Omega EZNA,100,8.63,foot,smaller aqueous layer; thicker milky white layer (~100uL),,Madeleine Reed-Horn,PCR017,Madeleine Reed-Horn,Patella candei,1199,1199,92%,0,99.54%,658,JF763827.1
+LP-DNA-18,.1,327927,Phorcus sauciatus,17-Oct-2023,Omega EZNA,100,17.8,foot,smaller aqueous layer; thicker milky white layer (~100uL),elastic string to mark ind .1,Madeleine Reed-Horn,PCR018,Madeleine Reed-Horn,Phorcus sauciatus,1216,1216,92%,0,100.00%,658,JN686312.1
+LP-DNA-19,.1,327921,Patella piperata,6-Nov-2025,Omega EZNA,100,,foot/mantle,,separated .1,"Tauana Cunha, Gabby Dawson",,,,,,,,,,
+LP-DNA-20,.2,327921,Patella piperata,6-Nov-2025,Omega EZNA,100,,foot,,separated .2,"Tauana Cunha, Gabby Dawson",,,,,,,,,,
+LP-DNA-21,.1,327936,Gibbula candei,20-Nov-2025,Omega EZNA,100,,foot,,separated .1 ind; operculum saved,Gabby Dawson,,,,,,,,,,
+LP-DNA-22,.2,327936,Gibbula candei,20-Nov-2025,Omega EZNA,100,,foot,,separated .2 ind; pulled most of body from shell and saved it; operculum broke but saved,Gabby Dawson,,,,,,,,,,
+LP-DNA-23,.1,327926,Phorcus sauciatus,16-Dec-2025,Omega EZNA,100,,foot,,separated .1 and .2 ind into a different jar separate from other lots of same species; operculum saved,Gabby Dawson,,,,,,,,,,
+LP-DNA-24,.2,327926,Phorcus sauciatus,16-Dec-2025,Omega EZNA,100,,foot,small amount of tissue added for digestion,,Gabby Dawson,,,,,,,,,,
+LP-DNA-25,.1,327912,Haliotis tuberculata,21-Jan-2026,Omega EZNA,100,,foot,,separated .1,Gabby Dawson,,,,,,,,,,
+LP-DNA-26,.2,327912,Haliotis tuberculata,21-Jan-2026,Omega EZNA,100,,foot,,separated .2; foot separated from speciman but saved ,Gabby Dawson,,,,,,,,,,
+LP-DNA-27,.3,327912,Haliotis tuberculata,21-Jan-2026,Omega EZNA,100,,foot,small amount of tissue added for digestion,separated .3,Gabby Dawson,,,,,,,,,,
+LP-DNA-28,.4,327912,Haliotis tuberculata,21-Jan-2026,Omega EZNA,100,,foot,,separated .4,Gabby Dawson,,,,,,,,,,
