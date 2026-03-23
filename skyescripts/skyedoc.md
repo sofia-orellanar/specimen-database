@@ -189,8 +189,9 @@ PAN20E004S082        Diodora alta                   Venado          12-Feb-2020 
 ('PAN20E004S069', 'Crepidula incurva', 'USNM1664602')
   ... (898 total USNM vouchers)
 
+# Roadmap
 
-
+1. Wrap queries into their own functions? e.g. `get_specimens_by_species("Fissurella virescens")`
 
 
 
