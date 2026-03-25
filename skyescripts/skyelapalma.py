@@ -55,15 +55,51 @@ event_clean = event_df.rename(
     }
 )
 # These columns are missing from La Palma but are in Panama - fill with None data for now
-panama_only_columns = [
+event_panama_only_columns = [
     "fieldwork_status",  # Might not matter if we're removing
     "low_tide",  # Also probably being removed
     "province",
     "area"
 ]
 
-for col in panama_only_columns:
+for col in event_panama_only_columns:
     event_clean[col] = None
 
 print("\n --- Cleaned EventData Columns ---")
 print(list(event_clean.columns))
+
+# ===========================================================================
+# DATA CLEANING: SpecimenData
+# ===========================================================================
+
+specimen_clean = specimen_df.rename(columns={
+    "SampleCode":    "lot_id",            # PRIMARY KEY
+    "EventCode":     "event_code",        # FOREIGN KEY (EventData)
+    "Species":       "species",
+    "Specimens":     "specimen_count",  
+    "Parts":         "parts",
+    "FixationMethod":"fixation_method",
+    "Family":        "family",
+    "Habitat":       "habitat",
+    "IdentifiedBy":  "identification_by",
+    "LabNotes":      "specimen_notes",    # Panama's "notes" was renamed to this
+    "FMNH":          "voucher",
+    "Order":         "clade", #temporary mapping, might come back to later
+    "PhotosLab":     "photos_org", #closest match (will remove anyways)
+})
+
+specimen_panama_only_columns = [
+    "suffix",               
+    "genus",                # Eventually parse out genus from species name to put in genus column
+    "epithet",              # Probably remove
+    "development",          # Larval development type; not recorded in La Palma
+    "vial",                 # Probably remove
+    "operculum",            # Probably remove
+    "second_voucher_clip",  
+]
+ 
+for col in specimen_panama_only_columns:
+    specimen_clean[col] = None
+    
+# print("\n --- Cleaned SpecimenData Columns ---")
+# print(list(specimen_clean.columns))

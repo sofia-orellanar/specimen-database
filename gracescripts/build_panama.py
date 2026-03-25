@@ -128,7 +128,6 @@ cursor.execute("""
 CREATE TABLE event (
     event_code TEXT PRIMARY KEY,
     trip_id TEXT,
-    fieldwork_status TEXT,
     year INT,
     month INT,
     day INT,

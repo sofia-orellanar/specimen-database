@@ -360,7 +360,7 @@ if len(orphan_specimens) > 0:
     print(
         f"\n  NOTE: {len(orphan_specimens)} specimen row(s) reference unknown event codes and were skipped: {orphan_specimens['event_code'].unique().tolist()}. Saving to orphan_specimens.csv for review."
     )
-    orphan_specimens.to_csv("skyescripts\\orphan_specimens.csv", index=False)
+    orphan_specimens.to_csv("panama_scripts/orphan_specimens.csv", index=False)
 
 # Now we can actually load the "cleared" rows
 valid_specimens.to_sql("SpecimenData", conn, if_exists="append", index=False)
