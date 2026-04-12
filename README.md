@@ -126,4 +126,10 @@ This query reports the voucher number, species, extraction date and concentratio
 
 
 ## Generating Blank CSV Files
-To generate blank CSV files based on the column names for each table... (adding this soon -Grace)
+In the directory "template_CSVs", there are blank CSVs created for the database as it was structured on 4/12/2026. This is to minimize the amount of manual column name edits users will have to make to input new CSV files into the existing database.
+
+To generate new blank CSV files based on the currenty column names for each table, run the script "get_blank_csvs.py"
+
+    python3 database-scripts/get_blank_csvs.py
+
+These CSV files can be opened as Excel files for easy use during data collection, and then exported as CSV files to add to database after data is recorded.
