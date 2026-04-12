@@ -1,0 +1,6 @@
+event_code,trip_id,year,month,day,date,waypoint,latitude,longitude,environment,collecting_method,depth,locality,country,collector,speices_target
+TEST-E010,TEST2024,2024,7,1,2024-07-01,WP010,8.9824,-79.5199,intertidal,hand collection,0-1m,Test Beach,Panama,J. Smith,gastropods
+TEST-E010,TEST2024,2024,7,1,2024-07-01,WP010,8.9824,-79.5199,intertidal,hand collection,0-1m,Test Beach,Panama,J. Smith,gastropods
+TEST-E011,TEST2024,2024,7,2,2024-07-02,WP011,9.0012,-79.5422,subtidal,SCUBA,5-10m,Deep Reef,Panama,A. Rivera,bivalves
+,TEST2024,2024,7,3,2024-07-03,WP012,9.0145,-79.5508,intertidal,hand collection,0-1m,Rocky Shore,Panama,J. Smith,chitons
+TEST-E012,TEST2024,2024,7,4,2024-07-04,WP013,9.0200,-79.5600,intertidal,hand collection,0-1m,Tide Pool,Panama,J. Smith,

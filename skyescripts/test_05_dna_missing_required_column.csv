@@ -1,0 +1,4 @@
+lot_id,extraction_date,extraction_kit,elution_ul,qubit_dna_ng_ul,piece_size,extraction_notes
+TEST-S001,2024-08-01,Qiagen DNeasy,100,45.2,small clip,Good yield
+TEST-S002,2024-08-01,Qiagen DNeasy,100,12.7,small clip,Low yield - tissue was old
+TEST-S003,2024-08-02,Qiagen DNeasy,100,88.4,large clip,Excellent yield

@@ -191,7 +191,7 @@ print(f"\nCleaned Genomic Library columns: {list(library_clean.columns)}")
 # The "connection" (conn) is your link to the database file
 # The "cursor" (cur) is the object you use to send SQL commands
 
-db_path = "database-scripts/cunha_invertebrate_specimens.db"
+db_path = "skyescripts/TEST_cunha_invertebrate_specimens.db"
 
 # Cleaning outputs made during testing
 if os.path.exists(db_path):

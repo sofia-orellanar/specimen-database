@@ -1,0 +1,6 @@
+lot_id,event_code,species,genus,suffix,development,habitat,fixation_method,specimen_count,parts,specimen_notes,identification_by,voucher,second_voucher_clip
+TEST-S001,TEST-E001,Tegula verrucosa,Tegula,,adult,rocky intertidal,ethanol 95%,3,whole body,Collected under rocks,J. Smith,FMNH-001,
+TEST-S002,TEST-E001,Nerita scabricosta,Nerita,,adult,rocky intertidal,ethanol 95%,1,whole body,,J. Smith,FMNH-002,
+TEST-S003,TEST-E002,Stramonita brevicula,Stramonita,,adult,subtidal rocky,ethanol 95%,2,whole body; operculum,Two individuals same crevice,A. Rivera,FMNH-003,FMNH-003B
+TEST-S004,TEST-E003,Chiton articulatus,Chiton,,adult,intertidal rocky,ethanol 95%,1,whole body,,A. Rivera,,
+TEST-S005,TEST-E004,Fissurella virescens,Fissurella,,adult,subtidal,ethanol 95%,4,whole body,Color variation noted,J. Smith,FMNH-004,
