@@ -4,19 +4,21 @@ import os
 
 # ===========================================================================
 # IMPORTANT!!!!!
-# RUN clean_load_panama.py BEFORE EVERY TIME you run this script
+# IF you want to run this script, you MUST RUN panama_clean_load.py BEFORE!
 # ===========================================================================
 
 # ===========================================================================
-# LOADING CSVs WITH PANDAS
+# INITIAL LOADING AND VALIDATION OF CSV COLUMNS
 # ===========================================================================
 
-# pd.read_csv() reads a CSV file and turns it into a DataFrame object
-event_df = pd.read_csv("LaPalma2023-Main-Dataset\\LaPalma2023-EventData.csv")
-specimen_df = pd.read_csv("LaPalma2023-Main-Dataset\\LaPalma2023-SpecimenData.csv")
-dna_df = pd.read_csv("LaPalma2023-Main-Dataset\\LaPalma2023-DNAextractions.csv")
+# Define paths and load La Palma CSVs
+path = "LaPalma2023-Main-Dataset/"
+db_path = "skyescripts/TEST_cunha_invertebrate_specimens.db"
 
-# Inspect/Verify data by getting rows and column counts (If they don't match you know something messed up)
+event_df = pd.read_csv(path + "LaPalma2023-EventData.csv")
+specimen_df = pd.read_csv(path + "LaPalma2023-SpecimenData.csv")
+dna_df = pd.read_csv(path + "LaPalma2023-DNAextractions.csv")
+
 print(f"\nEvent Data:        {event_df.shape[0]} rows, {event_df.shape[1]} columns")
 print(f"Specimen Data:     {specimen_df.shape[0]} rows, {specimen_df.shape[1]} columns")
 print(f"DNA Extractions:   {dna_df.shape[0]} rows, {dna_df.shape[1]} columns")
@@ -29,6 +31,38 @@ print(list(specimen_df.columns))
 
 print("\n--- DNA Extraction column names ---")
 print(list(dna_df.columns))
+
+# Get master column names from database
+conn = sqlite3.connect(db_path)
+cursor = conn.cursor()
+
+# Get EventData columns
+cursor.execute("SELECT * FROM EventData LIMIT 0")
+db_event_cols = [d[0] for d in cursor.description]
+
+# Get SpecimenData columns
+cursor.execute("SELECT * FROM SpecimenData LIMIT 0")
+db_spec_cols = [d[0] for d in cursor.description]
+
+# Get DNAExtractions columns
+cursor.execute("SELECT * FROM DNAExtractions LIMIT 0")
+db_dna_cols = [d[0] for d in cursor.description]
+
+conn.close()
+
+# VALIDATION FUNCTION
+def check_schema(table_name, db_columns, csv_columns):
+    print(f"-- LaPalma: {table_name} --")
+    for col in db_columns:
+        if col not in csv_columns:
+            print(f"MISSING: {col} -> Fix name or add column to CSV")
+    print()
+
+
+# Run checks
+check_schema("Event Table", db_event_cols, list(event_df.columns))
+check_schema("Specimen Table", db_spec_cols, list(specimen_df.columns))
+check_schema("DNA Table", db_dna_cols, list(dna_df.columns))
 
 # ===========================================================================
 # DATA CLEANING: EventData
@@ -240,13 +274,10 @@ print(list(dna_clean.columns))
 # already created. Do NOT use os.remove() here — that would delete Panama data.
 # Run clean_load_panama.py first, then run this script.
 
-db_path = "skyescripts\\panama_specimens.db"
-
 conn = sqlite3.connect(db_path)
 cur = conn.cursor()
 
 cur.execute("PRAGMA foreign_keys = ON;")
-
 
 def add_missing_column(cursor, table, column, col_type):
     """Helper function to add columns that exist in one table but not another"""
@@ -290,6 +321,47 @@ print("\nAll table columns updated.")
 # ===========================================================================
 # LOADING DATA INTO DATABASE
 # ===========================================================================
+
+# Verify correct column names
+event_cols_lapalma= list(event_clean.columns)
+print('\n--LaPalma--')
+print('--Event Table--')
+good_event_cols_count=0
+bad_event_cols_count=0
+for col in db_event_cols:
+    check= 'Fix name'
+    if col not in event_cols_lapalma:
+        bad_event_cols_count+=1
+        print(col, check)
+    good_event_cols_count+=1
+print(f'Flagged {bad_event_cols_count} columns requiring correction.\n {good_event_cols_count} columns succesfully matched.')
+
+spec_cols_lapalma= list(specimen_clean.columns)
+print('\n--LaPalma--')
+print('--Specimen Table--')
+good_spec_cols_count=0
+bad_spec_cols_count=0
+for col in db_spec_cols:
+    check= 'Fix name'
+    if col not in spec_cols_lapalma:
+        bad_espec_cols_count+=1
+        print(col, check)
+    good_spec_cols_count+=1
+print(f'Flagged {bad_spec_cols_count} columns requiring correction.\n {good_spec_cols_count} columns succesfully matched.')
+
+dna_cols_lapalma= list(dna_clean.columns)
+print('\n--LaPalma--')
+print('--DNA Table--')
+good_dna_cols_count=0
+bad_dna_cols_count=0
+for col in db_dna_cols:
+    check= 'Fix name'
+    if col not in dna_cols_lapalma:
+        bad_dna_cols_count+=1
+        print(col, check)
+    good_dna_cols_count+=1
+print(f'Flagged {bad_dna_cols_count} columns requiring correction.\n {good_dna_cols_count} columns succesfully matched.')
+
 event_clean.to_sql("EventData", conn, if_exists="append", index=False)
 print(f"\nLoaded {len(event_clean)} rows into EventData")
 

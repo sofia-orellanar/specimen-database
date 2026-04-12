@@ -7,10 +7,10 @@ import os
 # ===========================================================================
 
 # pd.read_csv() reads a CSV file and turns it into a DataFrame object
-event_df = pd.read_csv("Panama2021-Main-Dataset\\Panama2021-EventData.csv")
-specimen_df = pd.read_csv("Panama2021-Main-Dataset\\Panama2021-SpecimenData.csv")
-dna_df = pd.read_csv("Panama2021-Main-Dataset\\Panama2021-DNAextractions.csv")
-library_df = pd.read_csv("Panama2021-Main-Dataset\\Panama2021-GenomicLibraries.csv")
+event_df = pd.read_csv("Panama2021-Main-Dataset/Panama2021-EventData.csv")
+specimen_df = pd.read_csv("Panama2021-Main-Dataset/Panama2021-SpecimenData.csv")
+dna_df = pd.read_csv("Panama2021-Main-Dataset/Panama2021-DNAextractions.csv")
+library_df = pd.read_csv("Panama2021-Main-Dataset/Panama2021-GenomicLibraries.csv")
 
 
 # Inspect/Verify data by getting rows and column counts (If they don't match you know something messed up)
@@ -42,7 +42,7 @@ event_clean = event_df.rename(
     columns={
         "trip_id": "trip_id",
         "event_code": "event_code",  # PRIMARY KEY
-        "fieldwork_status": "fieldwork_status", #remove
+        "fieldwork_status": "fieldwork_status",  # remove
         "year": "year",
         "month": "month",
         "day": "day",
@@ -51,7 +51,7 @@ event_clean = event_df.rename(
         "latitude": "latitude",
         "longitude": "longitude",
         "environment": "environment",
-        "low_tide": "low_tide", #remove? not in la palma
+        "low_tide": "low_tide",  # remove? not in la palma
         "collecting_method": "collecting_method",
         "depth": "depth",
         "population": "population",  # this will get removed
@@ -60,7 +60,7 @@ event_clean = event_df.rename(
         "city_district": "city_district",
         "province": "province",
         "area": "area",
-        "photos_env": "photos_env", #remove
+        "photos_env": "photos_env",  # remove
         "country": "country",
         "collector": "collector",
         "notes": "event_notes",  # Renamed - all the datasets have a notes column so need to rename to avoid confusion (disambiguation)
@@ -72,6 +72,9 @@ event_clean = event_df.rename(
 # .loc[] in pandas drops columns
 # The ~ means "not" so we keep all columns that do NOT start with "Unnamed"
 # pandas is doing some stuff with making a boolean array for all columns
+event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("fieldwork_status")]
+event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("low_tide")]
+event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("photos_env")]
 event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("use_in_map")]
 event_clean = event_clean.loc[:, ~event_clean.columns.str.startswith("population")]
 
@@ -81,25 +84,32 @@ specimen_clean = specimen_df.rename(
         "sufix": "suffix",  # Spelling
         "event_code": "event_code",  # FOREIGN KEY (EventData)
         "species": "species",
-        "genus": "genus",
-        "epithet": "epithet",
-        "clade": "clade",
-        "family": "family",
-        "development": "development",
+        "genus": "genus", 
+        "epithet": "epithet", #remove
+        "clade": "clade",#remove
+        "family": "family", #remove
+        "development": "development", #keep but ask about/add to La Palma
         "habitat": "habitat",
-        "fixation_method": "fixation_method",
+        "fixation_method": "fixation_method", #add ethanol 95% in panama
         "specimens": "specimen_count",  # More descriptive
-        "parts": "parts",
-        "vial": "vial",
-        "operculum": "operculum",
+        "parts": "parts", #keep but ask about/add to La Palma
+        "vial": "vial", #remove
+        "operculum": "operculum", #remove
         "notes": "specimen_notes",  # Renamed
-        "photos_org": "photos_org",
+        "photos_org": "photos_org", #remove
         "identification_by": "identification_by",
         "Voucher": "voucher",  # lowercase
         "SecondVoucherClip": "second_voucher_clip",
+        # need to add a column for location of sample in the lab
     }
 )
 
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("epithet")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("clade")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("family")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("vial")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("operculum")]
+specimen_clean = specimen_clean.loc[:, ~specimen_clean.columns.str.startswith("photos_org")]
 # Remove unnamed last columns
 # keep all columns that do NOT start with "Unnamed"
 specimen_clean = specimen_clean.loc[
@@ -111,26 +121,32 @@ dna_clean = dna_df.rename(
     columns={
         "extraction_id": "extraction_id",  # PRIMARY KEY
         "lot_id": "lot_id",  # FOREIGN KEY (SpecimenData)
-        "species": "species",
-        "plate_id": "plate_id",
-        "plate_well": "plate_well",
+        "species": "species", #remove
+        "plate_id": "plate_id", #remove, maybe ask?
+        "plate_well": "plate_well", #remove, maybe ask?
         "extraction_date": "extraction_date",
         "extraction_kit": "extraction_kit",
         "elution_ul": "elution_ul",
         "Qubit_DNA_[ng/ul]": "qubit_dna_ng_ul",  # Removed brackets and slashes
-        "Nanodrop_[ng/ul]": "nanodrop_ng_ul",
-        "Nanodrop_260/280": "nanodrop_260_280",
-        "Nanodrop_260/230": "nanodrop_260_230",
-        "Qubit : Nanodrop": "qubit_nanodrop_ratio",
-        "clip_over": "clip_over",
-        "contamination_plate": "contamination_plate",
-        "contamination_wells": "contamination_wells",
+        "Nanodrop_[ng/ul]": "nanodrop_ng_ul", #create dummy in La Palma
+        "Nanodrop_260/280": "nanodrop_260_280", #create dummy in La Palma
+        "Nanodrop_260/230": "nanodrop_260_230", #create dummy in La Palma
+        "Qubit : Nanodrop": "qubit_nanodrop_ratio", #create dummy in La Palma
+        "clip_over": "clip_over", #create dummy in La Palma
+        "contamination_plate": "contamination_plate", #create dummy in La Palma
+        "contamination_wells": "contamination_wells",#create dummy in La Palma
         "extraction_notes": "extraction_notes",
         "piece_size": "piece_size",
-        "Qubit_after_SpeedVac": "qubit_after_speedvac",
+        "Qubit_after_SpeedVac": "qubit_after_speedvac", #create dummy in La Palma
     }
 )
 
+
+dna_clean = dna_clean.loc[:, ~dna_clean.columns.str.startswith("species")]
+dna_clean = dna_clean.loc[:, ~dna_clean.columns.str.startswith("plate_id")]
+dna_clean = dna_clean.loc[:, ~dna_clean.columns.str.startswith("plate_well")]
+
+### add empty columns for BLAST info to Panama
 library_clean = library_df.rename(
     columns={
         "library_id": "library_id",  # PRIMARY KEY
@@ -175,7 +191,7 @@ print(f"\nCleaned Genomic Library columns: {list(library_clean.columns)}")
 # The "connection" (conn) is your link to the database file
 # The "cursor" (cur) is the object you use to send SQL commands
 
-db_path = "skyescripts\\panama_specimens.db"
+db_path = "database-scripts/cunha_invertebrate_specimens.db"
 
 # Cleaning outputs made during testing
 if os.path.exists(db_path):
@@ -200,9 +216,8 @@ cur.execute("PRAGMA foreign_keys = ON;")
 cur.execute(
     """
 CREATE TABLE IF NOT EXISTS EventData (
-    event_code       TEXT PRIMARY KEY,  -- Unique ID for each collection event
+    event_code       TEXT PRIMARY KEY,
     trip_id          TEXT,
-    fieldwork_status TEXT,
     year             INTEGER,
     month            INTEGER,
     day              INTEGER,
@@ -211,20 +226,16 @@ CREATE TABLE IF NOT EXISTS EventData (
     latitude         REAL,
     longitude        REAL,
     environment      TEXT,
-    low_tide         REAL,
     collecting_method TEXT,
     depth            TEXT,
-    population       TEXT,
     locality         TEXT,
     locality_details TEXT,
     city_district    TEXT,
     province         TEXT,
     area             TEXT,
-    photos_env       TEXT,
     country          TEXT,
     collector        TEXT,
-    event_notes      TEXT,
-    use_in_map       TEXT
+    event_notes      TEXT
 );
 """
 )
@@ -241,18 +252,12 @@ CREATE TABLE IF NOT EXISTS SpecimenData (
     event_code       TEXT,              -- Links to EventData
     species          TEXT,
     genus            TEXT,
-    epithet          TEXT,
-    clade            TEXT,
-    family           TEXT,
     development      TEXT,
     habitat          TEXT,
     fixation_method  TEXT,
     specimen_count   INTEGER,
     parts            TEXT,
-    vial             TEXT,
-    operculum        TEXT,
     specimen_notes   TEXT,
-    photos_org       TEXT,
     identification_by TEXT,
     voucher          TEXT,
     second_voucher_clip TEXT,
@@ -267,9 +272,6 @@ cur.execute(
 CREATE TABLE IF NOT EXISTS DNAExtractions (
     extraction_id         TEXT PRIMARY KEY,  -- Unique ID for each extraction
     lot_id                TEXT,              -- Links to SpecimenData
-    species               TEXT,
-    plate_id              TEXT,
-    plate_well            TEXT,
     extraction_date       TEXT,
     extraction_kit        TEXT,
     elution_ul            REAL,
@@ -358,7 +360,7 @@ if len(orphan_specimens) > 0:
     print(
         f"\n  NOTE: {len(orphan_specimens)} specimen row(s) reference unknown event codes and were skipped: {orphan_specimens['event_code'].unique().tolist()}. Saving to orphan_specimens.csv for review."
     )
-    orphan_specimens.to_csv("skyescripts\\orphan_specimens.csv", index=False)
+    orphan_specimens.to_csv("database-scripts/orphan_specimens.csv", index=False)
 
 # Now we can actually load the "cleared" rows
 valid_specimens.to_sql("SpecimenData", conn, if_exists="append", index=False)
@@ -372,10 +374,3 @@ print(f"Loaded {len(library_clean)} rows into GenomicLibraries")
 
 conn.commit()
 print("\nAll data loaded successfully!")
-
-for table in ["EventData", "SpecimenData", "DNAExtractions"]:
-    cur.execute(f"SELECT COUNT(*) FROM {table}")
-    print(f"{table}: {cur.fetchone()[0]} rows")
-
-cur.execute("SELECT COUNT(*) FROM EventData WHERE event_code LIKE 'CAN%'")
-print(f"La Palma events confirmed: {cur.fetchone()[0]}")
