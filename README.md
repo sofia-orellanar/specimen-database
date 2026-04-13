@@ -143,13 +143,13 @@ To verify the database is working correctly, we have included two example querie
 
 **Test Query 1:** counts the number of specimens per species, returning the top 10:
 
-> ```
-> SELECT species, COUNT(*) AS specimen_count
-    FROM SpecimenData
-    GROUP BY species
-    ORDER BY specimen_count DESC
-    LIMIT 10
-> ```
+```sql
+SELECT species, COUNT(*) AS specimen_count
+FROM SpecimenData
+GROUP BY species
+ORDER BY specimen_count DESC
+LIMIT 10
+```
 
 To run the Python script:
 
@@ -159,14 +159,14 @@ The correct output for this query is saved in `TEST-database-scripts/check_query
 
 **Test Query 2**: returns voucher number, species, extraction date, and DNA concentration for samples with a Qubit concentration above 100 ng/µL that have been deposited in a museum:
 
-> ```
-> SELECT voucher, species, extraction_date, qubit_dna_ng_ul
-    FROM SpecimenData
-    JOIN EventData on SpecimenData.event_code = EventData.event_code
-    JOIN DNAExtractions on SpecimenData.lot_id= DNAExtractions.lot_id
-    WHERE qubit_dna_ng_ul > 100 AND Voucher != 'NA'
-    ORDER BY Qubit_DNA_ng_ul DESC
-    ```
+```sql
+SELECT voucher, species, extraction_date, qubit_dna_ng_ul
+FROM SpecimenData
+JOIN EventData on SpecimenData.event_code = EventData.event_code
+JOIN DNAExtractions on SpecimenData.lot_id= DNAExtractions.lot_id
+WHERE qubit_dna_ng_ul > 100 AND Voucher != 'NA'
+ORDER BY Qubit_DNA_ng_ul DESC
+```
 
 To run the Python script:
 
