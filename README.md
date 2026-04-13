@@ -5,7 +5,7 @@ This project's goal is to build a SQL database that combines invertebrate specie
 ---
 ## Required Tools
 
-* [**Python**]((https://www.python.org/downloads/) version 3.12.3 or higher 
+* [**Python**](https://www.python.org/downloads/) version 3.12.3 or higher 
 * **SQLite3** : usually pre-installed with Python
 * **pandas**: install by running:
 
