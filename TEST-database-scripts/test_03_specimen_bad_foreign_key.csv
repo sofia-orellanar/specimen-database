@@ -1,0 +1,5 @@
+lot_id,event_code,species,genus,suffix,development,habitat,fixation_method,specimen_count,parts,specimen_notes,identification_by,voucher,second_voucher_clip
+TEST-S006,TEST-E001,Tegula verrucosa,Tegula,,adult,rocky intertidal,ethanol 95%,1,whole body,,J. Smith,,
+TEST-S007,TEST-5555,Nerita funiculata,Nerita,,adult,rocky intertidal,ethanol 95%,2,whole body,event TEST-E999 does not exist,J. Smith,,
+TEST-S008,FAIL-EVENT,Purpura pansa,Purpura,,adult,intertidal,ethanol 95%,1,whole body,event GHOST-EVENT does not exist,A. Rivera,,
+TEST-S009,TEST-E002,Chiton articulatus,Chiton,,adult,intertidal rocky,ethanol 95%,3,whole body,,A. Rivera,,

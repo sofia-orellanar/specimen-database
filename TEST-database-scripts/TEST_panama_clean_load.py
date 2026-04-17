@@ -191,7 +191,7 @@ print(f"\nCleaned Genomic Library columns: {list(library_clean.columns)}")
 # The "connection" (conn) is your link to the database file
 # The "cursor" (cur) is the object you use to send SQL commands
 
-db_path = "panama_scripts/panama_specimens.db"
+db_path = "TEST-database-scripts/TEST_cunha_invertebrate_specimens.db"
 
 # Cleaning outputs made during testing
 if os.path.exists(db_path):
@@ -360,7 +360,7 @@ if len(orphan_specimens) > 0:
     print(
         f"\n  NOTE: {len(orphan_specimens)} specimen row(s) reference unknown event codes and were skipped: {orphan_specimens['event_code'].unique().tolist()}. Saving to orphan_specimens.csv for review."
     )
-    orphan_specimens.to_csv("panama_scripts/orphan_specimens.csv", index=False)
+    orphan_specimens.to_csv("database-scripts/orphan_specimens.csv", index=False)
 
 # Now we can actually load the "cleared" rows
 valid_specimens.to_sql("SpecimenData", conn, if_exists="append", index=False)
