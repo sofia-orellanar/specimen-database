@@ -49,11 +49,13 @@ A complete database file including data from the Panama 2021 dataset and La Palm
 
 ## Accessing Database
 ### Viewing Database
-There are various ways to view the database file (.db) file. We recommend using the **VSQLite Explorer** extension through VSCode. This extension is open access and allows the user to view each table, edit entries, and execute queries and commands in a more intuitive way without using an intermediate Python script.
+There are various ways to view the database file (.db) file. We recommend using **DB Browswer for SQLite**. This is a free application that allows a user to upload a .db file to browse, query, and edit it. One limitation of this GUI is that it is not a shared file, so one user would be able to access it. Users could coordinate a GitHub page to pull and push database edits, which ensures the integrity of the database if a user makes a mistake. Our user guide for installing and setting up our database file with DB Browser is included in the GitHub.
 
-Other options include:
-* **DB Browser for SQLite**: a standalone desktop app available at [https://sqlitebrowser.org/](https://sqlitebrowser.org/) (NOT TESTED as of 4/13/26)
-* **Python scripts**: run SQL commands directly using `sqlite3` and `pandas`, as shown in the example query scripts
+For other scripts included for this project, any Python IDE is sufficient, but we recommend VScode. 
+
+Other storage options include:
+* **Remote Server**: allows multiple users to edit the same database file. When accessed through VSCode, the extension VSQLite Explorer is helpful for browsing and editing. In this case, we recommend using Python scripts ato run SQL commands directly using `sqlite3` and `pandas`, as shown in the example query scripts. However, this option is less user friendly to researchers unfamiliar to the command line and writing scripts.
+* **Remote Host**: (Laravel Cloud, Google Cloud, etc) allows multiple users to edit and access the database and is stored with a 3rd party service. This often requires a regular fee for storage, but may be an appropriate option depending on the number
 
 ### Adding Single Rows and Columns
 **Adding Columns**
@@ -96,6 +98,8 @@ For example, to update the dummy_01 row above to include the common_name and col
 
     UPDATE SpecimenData SET common_name = "Colossal Squid", collected_by= "LU Wolf" WHERE lot_id == "dummy_01"
 
+### Adding a New Table
+To add an additional table...
 
 ## Adding Additional Datasets
 `TEST_verify_and_load.py` is an interactive script for safely adding new data to the existing database. It validates your CSV before inserting anything, and will clearly report any errors or warnings it finds. Use the provided test CSV files to see how it handles different scenarios.
