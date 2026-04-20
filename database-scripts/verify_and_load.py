@@ -7,7 +7,7 @@ import sys
 # STEP 0: CONFIGURATION
 # ===========================================================================
 
-db_path = "skyescripts/TEST_cunha_invertebrate_specimens.db"
+db_path = "database-scripts/cunha_invertebrate_specimens.db"
 
 # SCHEMA dictionary will be used to validate incoming table columns
 # keys are 1 of the 4 tables in the database (EventData, SpecimenData, DNAextractions, GenomicLibraries)
