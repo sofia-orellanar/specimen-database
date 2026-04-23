@@ -49,7 +49,7 @@ A complete database file including data from the Panama 2021 dataset and La Palm
 
 ## Accessing Database
 ### Viewing Database
-There are various ways to view the database file (.db) file. We recommend using **DB Browswer for SQLite**. This is a free application that allows a user to upload a .db file to browse, query, and edit it. One limitation of this GUI is that it is not a shared file, so one user would be able to access it. Users could coordinate a GitHub page to pull and push database edits, which ensures the integrity of the database if a user makes a mistake. Our user guide for installing and setting up our database file with DB Browser is included in the GitHub.
+There are various ways to view the database file (.db) file. We recommend using **DB Browser for SQLite**. This is a free application that allows a user to upload a .db file to browse, query, and edit it. One limitation of this GUI is that it is not a shared file, so one user would be able to access it. Users could coordinate a GitHub page to pull and push database edits, which ensures the integrity of the database if a user makes a mistake. Our user guide for installing and setting up our database file with DB Browser is included in the GitHub.
 
 For other scripts included for this project, any Python IDE is sufficient, but we recommend VScode. 
 
