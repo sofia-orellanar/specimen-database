@@ -9,137 +9,72 @@ import sys
 
 db_path = "database-scripts/cunha_invertebrate_specimens.db"
 
-# SCHEMA dictionary will be used to validate incoming table columns
-# keys are 1 of the 4 tables in the database (EventData, SpecimenData, DNAextractions, GenomicLibraries)
-# those contain dictionaries with keys for primary_key, foreign_keys, required_cols, optional_cols and their corresponding values
-# optional_cols can be filled with NULL if missing values
-SCHEMA = {
-    "EventData": {
-        "primary_key": "event_code",
-        "foreign_keys": {},
-        "required_cols": ["event_code"],
-        "optional_cols": [
-            "trip_id",
-            "year",
-            "month",
-            "day",
-            "date",
-            "waypoint",
-            "latitude",
-            "longitude",
-            "environment",
-            "collecting_method",
-            "depth",
-            "locality",
-            "locality_details",
-            "city_district",
-            "province",
-            "area",
-            "country",
-            "collector",
-            "event_notes",
-        ],
-    },
-    "SpecimenData": {
-        "primary_key": "lot_id",
-        "foreign_keys": {"event_code": ("EventData", "event_code")},
-        "required_cols": ["lot_id", "event_code"],
-        "optional_cols": [
-            "suffix",
-            "species",
-            "genus",
-            "development",
-            "habitat",
-            "fixation_method",
-            "specimen_count",
-            "parts",
-            "specimen_notes",
-            "identification_by",
-            "voucher",
-            "second_voucher_clip",
-            "dna_extracted",
-            "phylum",
-            "class_name",
-            "subclass",
-            "uncertainty",
-            "collected_by",
-            "museum",
-            "specimenlocation_id",
-            "specimenlocation_shelf",
-        ],
-    },
-    "DNAExtractions": {
-        "primary_key": "extraction_id",
-        "foreign_keys": {"lot_id": ("SpecimenData", "lot_id")},
-        "required_cols": ["extraction_id", "lot_id"],
-        "optional_cols": [
-            "extraction_date",
-            "extraction_kit",
-            "elution_ul",
-            "qubit_dna_ng_ul",
-            "nanodrop_ng_ul",
-            "nanodrop_260_280",
-            "nanodrop_260_230",
-            "qubit_nanodrop_ratio",
-            "clip_over",
-            "contamination_plate",
-            "contamination_wells",
-            "extraction_notes",
-            "piece_size",
-            "qubit_after_speedvac",
-            "extraction_suffix",
-            "clipping_notes",
-            "extracted_by",
-            "coi",
-            "pcr_by",
-            "blast_best_match",
-            "blast_max_score",
-            "blast_total_score",
-            "blast_query_cover",
-            "blast_e_value",
-            "blast_percent_identity",
-            "blast_match_length",
-            "blast_match_accession",
-            "original_extraction_id",
-            "museum",
-            "specimenlocation_id",
-            "specimenlocation_shelf",
-        ],
-    },
-    "GenomicLibraries": {
-        "primary_key": "library_id",
-        "foreign_keys": {"extraction_id": ("DNAExtractions", "extraction_id")},
-        "required_cols": ["library_id", "extraction_id"],
-        "optional_cols": [
-            "lot_id",
-            "species",
-            "library_date",
-            "library_kit",
-            "qubit_dna_ng_ul",
-            "input_mass_ng",
-            "input_vol_ul",
-            "eb_complement_ul",
-            "frag_time_min",
-            "cycles",
-            "elution_ul",
-            "qubit_lib_ng_ul",
-            "size_selection",
-            "qubit_size_selection_ng_ul",
-            "idt_primer_well",
-            "primer_name",
-            "i5_index",
-            "i7_index",
-            "bioanalyzer_avg_size",
-            "insert_size",
-            "concentration_nm_estimate",
-            "data_target_gb",
-            "librarylocation_id",
-            "librarylocation_shelf",
-            "librarylocation_rack",
-            "librarylocation_box",
-        ],
-    },
-}
+# A SCHEMA dictionary will be used to validate incoming table columns
+# the dictionary is populated by the build_schema() function based on the live database, ensuring it reflects the most current updates to the SCHEMA rather than hardcoding columns
+
+#   primary_key  : the single primary key column name (str)
+#   foreign_keys : {col: (referenced_table, referenced_col), ...}
+#   required_cols: [primary key col] + [foreign key cols]
+#   optional_cols: all other columns (will be entered as NULL if missing from CSV)
+
+SCHEMA = {}
+def build_schema(conn):
+    """
+    Reads the live database schema using 2 PRAGMA queries per table.
+    The result is used to update the module-level SCHEMA dict so all downstream validation functions (choose_table, validate, etc) see it without any changes to those functions.
+
+    """
+    cursor = conn.cursor()
+
+    # get all user-defined tables
+    tables = [
+        row[0]
+        for row in cursor.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
+        ).fetchall()
+    ]
+
+    schema = {}
+    for table in tables:
+
+        # Primary Key
+        # get all column names and identify the primary key
+        # (Any row where pk field > 0, # 0 means not part of pk)
+        cols_info = cursor.execute(f"PRAGMA table_info({table})").fetchall()
+        pk_cols = [row[1] for row in cols_info if row[5] > 0]
+        # all tables in this database have a single-column pk
+        primary_key = pk_cols[0] if pk_cols else None
+
+        # Foreign Keys
+        # get foreign key relationships
+        # build in {local_col: (ref_table, ref_col)} format
+        fk_info = cursor.execute(f"PRAGMA foreign_key_list({table})").fetchall()
+        foreign_keys = {row[3]: (row[2], row[4]) for row in fk_info}
+
+
+        # Required Columns: primary key + any foreign key columns
+        # must be present in every CSV or database fails
+        # Optional Columns = everything else
+        # missing columns will be entered as NULL
+        required_cols = []
+        if primary_key:
+            required_cols.append(primary_key)
+        for fk_col in foreign_keys:
+            if fk_col not in required_cols:
+                required_cols.append(fk_col)
+
+        all_cols = [row[1] for row in cols_info]
+        optional_cols = [col for col in all_cols if col not in required_cols]
+
+        schema[table] = {
+            "primary_key": primary_key,
+            "foreign_keys": foreign_keys,
+            "required_cols": required_cols,
+            "optional_cols": optional_cols,
+        }
+
+    return schema
+
 
 # Helper functions to better organize terminal output for clarity
 
