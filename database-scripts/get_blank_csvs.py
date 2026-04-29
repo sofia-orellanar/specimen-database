@@ -6,7 +6,7 @@ import pandas as pd
 ############################################
 
 #connecting to database file
-conn = sqlite3.connect('database-scripts/cunha_invertebrate_specimens.db')
+conn = sqlite3.connect('initial-building-scripts/cunha_invertebrate_specimens.db')
 cursor = conn.cursor()
 
 #selecting all columns from EventData table and saving in a list

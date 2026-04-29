@@ -1,1 +1,1 @@
-lot_id,suffix,event_code,species,genus,development,habitat,fixation_method,specimen_count,parts,specimen_notes,identification_by,voucher,second_voucher_clip,dna_extracted,phylum,class_name,subclass,uncertainty,collected_by,specimenlocation_id,specimenlocation_shelf,museum
+lot_id,suffix,event_code,species,genus,development,habitat,fixation_method,specimen_count,parts,specimen_notes,identification_by,voucher,second_voucher_clip,dna_extracted,phylum,class_name,subclass,uncertainty,collected_by,museum,specimenlocation_id,specimenlocation_shelf,family,taxon_order
