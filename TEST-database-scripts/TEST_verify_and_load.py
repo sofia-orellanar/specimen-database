@@ -302,7 +302,7 @@ def validate(df, table_name, conn):
                 f"({len(orphan_rows)} affected row(s))"
             )
             # Save orphans to a csv for review
-            orphan_path = f"scriptsTEST-database-scripts/orphan_{table_name}_{fk_col}.csv"
+            orphan_path = f"TEST-database-scripts/orphan_{table_name}_{fk_col}.csv"
             orphan_rows.to_csv(orphan_path, index=False)
             warn(f"Orphan rows saved to '{orphan_path}' for review")
         else:
