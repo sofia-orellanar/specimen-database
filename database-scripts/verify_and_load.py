@@ -7,7 +7,7 @@ import sys
 # STEP 0: CONFIGURATION
 # ===========================================================================
 
-db_path = "database-scripts/cunha_invertebrate_specimens.db"
+db_path = "initial-building-scripts/cunha_invertebrate_specimens.db"
 
 # A SCHEMA dictionary will be used to validate incoming table columns
 # the dictionary is populated by the build_schema() function based on the live database, ensuring it reflects the most current updates to the SCHEMA rather than hardcoding columns
@@ -388,6 +388,8 @@ def main():
     conn.execute("PRAGMA foreign_keys = ON;")
 
     ok(f"Connected to database at '{db_path}'")
+    global SCHEMA
+    SCHEMA = build_schema(conn)
 
     # Step 1: Choose target table
     table_name = choose_table()

@@ -18,6 +18,8 @@ db_path = "TEST-database-scripts/TEST_cunha_invertebrate_specimens.db"
 #   optional_cols: all other columns (will be entered as NULL if missing from CSV)
 
 SCHEMA = {}
+
+
 def build_schema(conn):
     """
     Reads the live database schema using 2 PRAGMA queries per table.
@@ -50,7 +52,6 @@ def build_schema(conn):
         # build in {local_col: (ref_table, ref_col)} format
         fk_info = cursor.execute(f"PRAGMA foreign_key_list({table})").fetchall()
         foreign_keys = {row[3]: (row[2], row[4]) for row in fk_info}
-
 
         # Required Columns: primary key + any foreign key columns
         # must be present in every CSV or database fails
@@ -388,6 +389,8 @@ def main():
     conn.execute("PRAGMA foreign_keys = ON;")
 
     ok(f"Connected to database at '{db_path}'")
+    global SCHEMA
+    SCHEMA = build_schema(conn)
 
     # Step 1: Choose target table
     table_name = choose_table()
