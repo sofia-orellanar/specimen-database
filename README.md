@@ -121,7 +121,7 @@ DB Browser is a free application that allows a user to upload a .db file to brow
 
 ## Supabase
 
-(Describe and include link) (Also include that guides can be found in `user-guides/SupabaseAdminGuide.pdf` and `user-guides\SupabaseUserGuide.pdf`)
+A web-based database for managing the Cunha Lab;s collection. Built on **Supabase** (PostgreSQL) with a custom HTML/JavaScript interface hoster at [Netlify] (https://cunhalabdb.netlify.app/). The database tracks collection events, speciemen data, DNA extractions, genomic libraries, and loan specimens. Features include advanced taxonimic search, interactive collection map, CSV/Excel data upload with validation, automatix taxonomy lookup via the GBIF API, and role-based access control for the lab members. Admin and user guides can be found in `user-guides/SupabaseAdminGuide.pdf` and `user-guides\SupabaseUserGuide.pdf`
 
 ### Other ways to view the database
 
